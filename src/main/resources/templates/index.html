@@ -6,5 +6,44 @@
 </head>
 <body>
 <p>Get your greeting <a href="/greeting">here</a></p>
+
+
+<h3>Форма добавления сообщений</h3>
+
+<p th:if="${addInfo}">Сообщение <span  th:text="${addInfo}" style="color:red"></span>     добавлено</p>
+
+
+<form method="post" th:action="@{/filter}" th:object="${message}">
+    <label>Введите тег сообщения: <input th:field="*{tag}" type="text"></label>
+    <p><input type ="submit" value="Поиск"></p>
+</form>
+
+</p>
+</p>
+</p>
+
+
+<form method="post" th:action="@{/add}" th:object="${message}">
+    <label>Введите сообщение: <input th:field="*{text}" type="text"></label>
+    <label>Введите тег сообщения: <input th:field="*{tag}" type="text"></label>
+    <p><input type ="submit" value="Добавить"></p>
+</form>
+
+
+<p th:if="${allMessages}">Все сообщения:
+    <div th:each="messages : ${allMessages}">
+        <p th:text="${messages.id} + ': ' + ${messages.text} + ' ' + (${messages.tag})"></p>
+    </div>
+</p>
+
+<p th:if="${messageInfo}">Сообщение найдено:
+    <span
+    <p th:text="${messageInfo.id} + ': ' + ${messageInfo.text} + ' ' + (${messageInfo.tag})"></span> </p>
+
+</p>
+
+
+
+
 </body>
 </html>
