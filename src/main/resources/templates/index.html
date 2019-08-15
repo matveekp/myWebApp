@@ -1,10 +1,23 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
+
+<form th:action="@{/login}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Login Page</button>
+</form>
+
+<form th:action="@{/registration}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
+</form>
+
+<form th:action="@{/admin/home}" method="get">
+    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Admin Page</button>
+</form>
+
 <p>Get your greeting <a href="/greeting">here</a></p>
 
 
@@ -18,9 +31,6 @@
     <p><input type ="submit" value="Поиск"></p>
 </form>
 
-</p>
-</p>
-</p>
 
 
 <form method="post" th:action="@{/add}" th:object="${message}">
@@ -32,18 +42,20 @@
 
 <p th:if="${allMessages}">Все сообщения:
     <div th:each="messages : ${allMessages}">
-        <p th:text="${messages.id} + ': ' + ${messages.text} + ' ' + (${messages.tag})"></p>
+        <p th:text="${messages.id} + ': ' + ${messages.text} + ' (' + ${messages.tag}+')'"></p>
     </div>
 </p>
 
-<p th:if="${messageInfo}">Сообщение найдено:
-    <span
-    <p th:text="${messageInfo.id} + ': ' + ${messageInfo.text} + ' ' + (${messageInfo.tag})"></span> </p>
-
+<p th:if="${foundMessages}">Найденное сообщение(-ия):
+    <div th:each="messages : ${foundMessages}">
+<p th:text="${messages.id} + ': ' + ${messages.text} + ' (' + ${messages.tag}+')'"></p>
+</div>
 </p>
 
 
-
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 
 </body>
 </html>
